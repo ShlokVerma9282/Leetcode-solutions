@@ -1,51 +1,42 @@
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix) {
-          vector<int>ans;
-        int row=matrix.size();
-        int col =matrix[0].size();
-        int count =0;
-        int total =row*col;
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+        int n = mat.size();
+        int m = mat[0].size();
         
-        //// all index 
+        int top= 0;
+        int bottom = n-1;
+        int left = 0;
+        int right =m-1;
         
-        int startingrow=0;
-        int startingcol=0;
-        int endingrow=row-1;
-        int endingcol=col-1;
-        
-        while(count<total)
+        vector<int>ans;
+        while(top <= bottom && left <= right)
         {
-            for(int i=startingcol;count<total && i<=endingcol; i++)
+            for(int i=left;i<=right;i++)
             {
-                ans.push_back(matrix[startingrow][i]);
-                count++;
+                ans.push_back(mat[top][i]);
             }
-            startingrow++;
-            
-            for(int i=startingrow;count<total && i<=endingrow; i++)
+            top++;
+            for(int i=top;i<=bottom;i++)
             {
-                ans.push_back(matrix[i][endingcol]);
-                count++;
+                ans.push_back(mat[i][right]);
             }
-            endingcol--;
-            
-            for(int i=endingcol;count<total && i>=startingcol; i--)
-            {
-                ans.push_back(matrix[endingrow][i]);
-                count++;
+            right--;
+             if (top <= bottom) {
+              for (int i = right; i >= left; i--)
+               ans.push_back(mat[bottom][i]);
+
+              bottom--;
             }
-            endingrow--;
-            
-            for(int i=endingrow;count<total && i>=startingrow; i--)
-            {
-                ans.push_back(matrix[i][startingcol]);
-                count++;
+
+            // For moving bottom to top.
+            if (left <= right) {
+              for (int i = bottom; i >= top; i--)
+                ans.push_back(mat[i][left]);
+
+              left++;
             }
-            startingcol++;
         }
-        
-        
         return ans;
     }
 };
