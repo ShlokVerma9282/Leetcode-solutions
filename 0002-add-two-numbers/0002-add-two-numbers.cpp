@@ -14,24 +14,22 @@ public:
         ListNode* dump = new ListNode(0);
         ListNode* temp = dump;
         int carry =0;
-        while(l1!=NULL || l2!=NULL ||carry)
-        {
-            int sum =0;
-            if(l1!=NULL)
-            {
+        while(l1!=NULL||l2!=NULL||carry!=0){
+            int sum = 0;
+            if(l1!=NULL){
                 sum+=l1->val;
                 l1=l1->next;
             }
-             if(l2!=NULL)
-            {
+            if(l2!=NULL){
                 sum+=l2->val;
-                 l2=l2->next;
+                l2=l2->next;
             }
             sum+=carry;
             carry=sum/10;
-            ListNode* n = new ListNode(sum%10);
-            temp->next = n;
-            temp = temp->next;
+            ListNode *node = new ListNode(sum % 10); 
+            temp -> next = node; 
+            temp = temp -> next;
+            
         }
         return dump->next;
     }
